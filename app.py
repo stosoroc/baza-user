@@ -64,6 +64,10 @@ users = [
 {"name": "Anca Stan","age": 27,"email": "ancastan@example.com","city": "Brasov", "id": 30},
 ]
 
+@app.route('/users')
+def all_user():
+        return jsonify(users)
+
 @app.route('/users/<int:user_id>')
 def get_user(user_id):
     # Search for the user with the specified id
