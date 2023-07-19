@@ -1,7 +1,6 @@
 import sqlite3
 import os
 from flask import Flask, render_template, request, g, flash, abort, redirect, url_for, json, jsonify
-from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from UserLogin import UserLogin
