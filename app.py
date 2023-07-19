@@ -32,12 +32,36 @@ def greet(name):
         return jsonify({"mssg":f"Hello {name}"})
 
 users = [
-    {"name": "Jim", "age": 22, "id": 1},
-    {"name": "Ion", "age": 21, "id": 2},
-    {"name": "Ina", "age": 23, "id": 3},
-    {"name": "Ana", "age": 25, "id": 4},
-    {"name": "Pol", "age": 32, "id": 5},
-    # Add more users here...
+    {"name": "Andrei Popescu","age": 24,"email": "andreipopescu@example.com","city": "Bucharest", "id": 1},
+{"name": "Ana Maria Dragomir","age":  28,"email": "anamariadragomir@example.com","city": "Cluj-Napoca", "id": 2},
+{"name": "Adrian Diaconu","age":  26,"email": "adriandiaconu@example.com","city": "Timisoara", "id": 3},
+{"name": "Roxana Preda","age": 33,"email": "roxanapreda@example.com","city": "Constanta", "id": 4},
+{"name": "Florin Nicolae","age": 35,"email": "florinnicolae@example.com","city": "Brasov", "id": 5},
+{"name": "Cristina Tudor","age": 23,"email": "cristinatudor@example.com","city": "Iasi", "id": 6},
+{"name": "Mihai Dumitru","age": 31,"email": "mihaidumitru@example.com","city": "Cluj-Napoca", "id": 7},
+{"name": "Maria Popa","age": 21,"email": "mariapopa@example.com","city": "Sibiu", "id": 8},
+{"name": "Alexandru Rusu","age": 34,"email": "alexandrurusu@example.com","city": "Craiova", "id": 9},
+{"name": "Ioana Gheorghe","age": 22,"email": "ioanagheorghe@example.com","city": "Bucharest", "id": 10},
+{"name": "Victor Marinescu","age": 29,"email": "victormarinescu@example.com","city": "Timisoara", "id": 11},
+{"name": "Andreea Costache","age": 30,"email": "andreeacostache@example.com","city": "Constanta", "id": 12},
+{"name": "Cristian Pop","age": 25,"email": "cristianpop@example.com","city": "Brasov", "id": 13},
+{"name": "Teodora Munteanu","age": 27,"email": "teodoramunteanu@example.com","city": "Cluj-Napoca", "id": 14},
+{"name": "Gabriel Stanescu","age": 32,"email": "gabrielstanescu@example.com","city": "Iasi", "id": 15},
+{"name": "Alina Vasile","age": 23,"email": "alinavasile@example.com","city": "Sibiu", "id": 16},
+{"name": "Marius Enache","age": 33,"email": "mariusenache@example.com","city": "Brasov", "id": 17},
+{"name": "Ana-Maria Popescu","age": 24,"email": "anamariapopescu@example.com","city": "Bucharest", "id": 18},
+{"name": "Octavian Ionescu","age": 26,"email": "octavianionescu@example.com","city": "Craiova", "id": 19},
+{"name": "Diana Gavril","age": 31,"email": "dianagavril@example.com","city": "Cluj-Napoca", "id": 20},
+{"name": "Lucian Stoica","age": 35,"email": "lucianstoica@example.com","city": "Timisoara", "id": 21},
+{"name": "Corina Nedelcu","age": 28,"email": "corinanedelcu@example.com","city": "Constanta", "id": 22},
+{"name": "Bogdan Marin","age": 29,"email": "bogdanmarin@example.com","city": "Brasov", "id": 23},
+{"name": "Ana Predoiu","age": 23,"email": "anapredoiu@example.com","city": "Iasi", "id": 24},
+{"name": "Andrei Petrescu","age": 22,"email": "andreipetrescu@example.com","city": "Sibiu", "id": 25},
+{"name": "Elena Barbu","age": 23,"email": "elenabarbu@example.com","city": "Craiova", "id": 26},
+{"name": "Ionut Mihai","age": 30,"email": "ionutmihai@example.com","city": "Cluj-Napoca", "id": 27},
+{"name": "Alexandra Negru","age": 24,"email": "alexandranegru@example.com","city": "Timisoara", "id": 28},
+{"name": "Stefan Ion","age": 31,"email": "stefanion@example.com","city": "Constanta", "id": 29},
+{"name": "Anca Stan","age": 27,"email": "ancastan@example.com","city": "Brasov", "id": 30},
 ]
 
 @app.route('/users/<int:user_id>')
