@@ -8,7 +8,17 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_object(__name__)
 
-#app.config.update(dict(DATABASE=os.path.join(app.root_path,'flsite.db')))
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+uri = "mongodb+srv://seriouspostal:123123.bbb@cluster0.txedt1k.mongodb.net/?retryWrites=true&w=majority"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 
 @app.route('/summary')
