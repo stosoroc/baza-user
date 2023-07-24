@@ -70,6 +70,14 @@ def insert_element():
     else:
         return jsonify({'error': 'Failed to insert element'})
 
+@app.route('/delete/<int:user_id>')
+def delete_document(user_id):
+    result = collection.delete_one({'_id': user_id})
+    if result.deleted_count == 1:
+        return jsonify({'message': 'Document deleted'})
+    else:
+        return jsonify({'message': 'Document not found'})
+
 @app.route("/clear_database", methods=["GET"])
 def clear_database():
     # Удаление всех документов из коллекции
