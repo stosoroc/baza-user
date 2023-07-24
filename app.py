@@ -61,6 +61,15 @@ def get_user(user_id):
             return jsonify({'error': 'Document not found'})
     
 
+@app.route('/element', methods=['POST'])
+def insert_element():
+    element = request.get_json()
+    result = collection.insert_one(element)
+    if result:
+        return jsonify({'message': 'Element inserted successfully'})
+    else:
+        return jsonify({'error': 'Failed to insert element'})
+
 @app.route("/clear_database", methods=["GET"])
 def clear_database():
     # Удаление всех документов из коллекции
