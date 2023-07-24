@@ -13,6 +13,8 @@ from pymongo.server_api import ServerApi
 uri = "mongodb+srv://newtemp1:456123.qaz@cluster0.txedt1k.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
+db = client["user-data"]
+collection = db["users"]
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
@@ -108,6 +110,12 @@ def get_user(user_id):
 
     # If user with specified id is not found, return an error message
     return jsonify({'error': 'User not found'})
+
+@app.route("/clear_database", methods=["GET"])
+def clear_database():
+    # Удаление всех документов из коллекции
+    result = collection.delete_many({})
+    return f"Deleted {result.deleted_count} documents from the database."
 
 if __name__ == "__main__":
     app.run(debug=True)
