@@ -100,7 +100,7 @@ users = [
 @app.route('/users')
 def all_user():
         #return jsonify(users)
-    docc = str(r) for r in collection.find({})
+    docc = [str(r) for r in collection.find({})]
          return f"{docc}"
 
 @app.route('/users/<int:user_id>')
