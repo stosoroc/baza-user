@@ -70,6 +70,15 @@ def insert_element():
     else:
         return jsonify({'error': 'Failed to insert element'})
 
+@app.route('/update/<int:user_id>')
+def update_document(user_id):
+    data = request.get_json()
+    result = collection.update_one({'_id': user_id}, {'$set': data})
+    if result.modified_count == 1:
+        return jsonify({'message': 'Document updated'})
+    else:
+        return jsonify({'message': 'Document not found'})
+
 @app.route('/delete/<int:user_id>')
 def delete_document(user_id):
     result = collection.delete_one({'_id': user_id})
