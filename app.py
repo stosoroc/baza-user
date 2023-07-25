@@ -81,14 +81,14 @@ def get_user(user_id):
 @app.route('/element', methods=['POST'])
 def insert_element():
     element = request.get_json()
-    result = collection.insert_one(element)
+    result = collection.insert_one(element, {'$set': data})
     if result:
         return jsonify({'message': 'Element inserted successfully'})
     else:
         return jsonify({'error': 'Failed to insert element'})
 
 
-@app.route('/update/<string:user_id>')
+@app.route('/update/<string:user_id>', methods=["PATCH"])
 def update_document(user_id):
     data = request.get_json()
     result = collection.update_one({'_id': ObjectId(user_id)}, {'$set': data})
@@ -98,7 +98,7 @@ def update_document(user_id):
         return jsonify({'message': 'Document not found'})
 
 
-@app.route('/delete/<string:user_id>')
+@app.route('/delete/<string:user_id>', methods=["DELETE"])
 def delete_document(user_id):
     result = collection.delete_one({'_id': ObjectId(user_id)})
     if result.deleted_count == 1:
