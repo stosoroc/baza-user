@@ -1,11 +1,9 @@
 from pymongo.server_api import ServerApi
 from pymongo.mongo_client import MongoClient
-import sqlite3
-import json
 import os
-from flask import Flask, render_template, request, g, flash, abort, redirect, url_for, json, jsonify
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, request, g, json, jsonify
 from flask_cors import CORS
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 CORS(app)
@@ -58,6 +56,7 @@ users = [
 
 
 @app.route('/users')
+@app.route('/users/')
 def all_user():
     documents = list(collection.find())
     try:
@@ -67,16 +66,17 @@ def all_user():
         return jsonify(users)
 
 
-@app.route('/users/<int:user_id>')
+@app.route('/users/<string:user_id>', methods=['GET'])
 def get_user(user_id):
-    documents = collection.find_one({'_id': user_id})
+    documents = collection.find_one({'_id': ObjectId(user_id)})
+    documents['_id'] = str(documents['_id'])
     if documents:
         return jsonify(documents)
     else:
         return jsonify({'error': 'Document not found'})
 
 
-@app.route('/element', methods=['POST'])
+@app.route('/element')
 def insert_element():
     element = request.get_json()
     result = collection.insert_one(element)
@@ -86,19 +86,19 @@ def insert_element():
         return jsonify({'error': 'Failed to insert element'})
 
 
-@app.route('/update/<int:user_id>')
+@app.route('/update/<string:user_id>')
 def update_document(user_id):
     data = request.get_json()
-    result = collection.update_one({'_id': user_id}, {'$set': data})
+    result = collection.update_one({'_id': ObjectId(user_id)}, {'$set': data})
     if result.modified_count == 1:
         return jsonify({'message': 'Document updated'})
     else:
         return jsonify({'message': 'Document not found'})
 
 
-@app.route('/delete/<int:user_id>')
+@app.route('/delete/<string:user_id>')
 def delete_document(user_id):
-    result = collection.delete_one({'_id': user_id})
+    result = collection.delete_one({'_id': ObjectId(user_id)})
     if result.deleted_count == 1:
         return jsonify({'message': 'Document deleted'})
     else:
@@ -114,3 +114,4 @@ def clear_database():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
