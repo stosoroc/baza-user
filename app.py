@@ -78,7 +78,7 @@ def get_user(user_id):
         return jsonify({'error': 'Document not found'})
 
 
-@app.route('/element')
+@app.route('/element', methods=['POST'])
 def insert_element():
     element = request.get_json()
     result = collection.insert_one(element)
