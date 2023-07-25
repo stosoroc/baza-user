@@ -59,6 +59,7 @@ users = [
 @app.route('/users/')
 def all_user():
     documents = list(collection.find())
+    documents['_id'] = str(documents['_id'])
     try:
         json_object = jsonify(documents)
         return json_object
