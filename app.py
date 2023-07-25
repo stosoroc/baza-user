@@ -1,6 +1,7 @@
 from pymongo.server_api import ServerApi
 from pymongo.mongo_client import MongoClient
 import sqlite3
+import json
 import os
 from flask import Flask, render_template, request, g, flash, abort, redirect, url_for, json, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -52,17 +53,18 @@ users = [
     {"first_name": "Ana", "last_name": "Maria Dragomir", "age": 28, "email": "anamariadragomir@example.com", "city": "Cluj-Napoca", "_id": 2, "avatar": "https://i.pravatar.cc/80"},
     {"first_name": "Adrian", "last_name": "Diaconu", "age": 26, "email": "adriandiaconu@example.com", "city": "Timisoara", "_id": 3, "avatar": "https://i.pravatar.cc/80"},
     {"first_name": "Roxana", "last_name": "Preda", "age": 33, "email": "roxanapreda@example.com", "city": "Constanta", "_id": 4, "avatar": "https://i.pravatar.cc/80"},
-    {"first_name": "Florin", "last_name": "Nicolae", "age": 35, "email": "florinnicolae@example.com", "city": "Brasov", "_id": 5, "avatar": "https://i.pravatar.cc/80"}]
+    {"first_name": "Florin", "last_name": "Nicolae", "age": 35, "email": "florinnicolae@example.com", "city": "Brasov", "_id": 5, "avatar": "https://i.pravatar.cc/80"}
+    ]
 
 
 @app.route('/users')
 def all_user():
     documents = list(collection.find())
-    if documents:
-        return jsonify(documents)
-    else:
+    try:
+        json_object = jsonify(documents)
+        return json_object
+    except:
         return jsonify(users)
-    
 
 
 @app.route('/users/<int:user_id>')
