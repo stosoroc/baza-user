@@ -59,7 +59,7 @@ users = [
 @app.route('/users')
 @app.route('/users/')
 def all_user():
-    documents = list(collection.find())
+    documents = list(collection.find().sort('_id', -1))
     for d in documents:
         d['_id'] = str(d['_id'])
     try:
