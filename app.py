@@ -48,6 +48,7 @@ def login():
         return jsonify({'message': 'Неверные учетные данные'}), 401
 
 
+@app.route('/protected', methods=['GET'])
 @app.route('/number/<var1>')
 def number(var1):
     return jsonify({"number": f"{var1}"})
