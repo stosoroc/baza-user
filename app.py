@@ -5,10 +5,14 @@ from flask import render_template
 from flask import Flask, request, g, json, jsonify
 from flask_cors import CORS
 from bson.objectid import ObjectId
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 CORS(app)
 app.config.from_object(__name__)
+app.config['JWT_SECRET_KEY'] = 'djdjdo4o2o7od8o9oo0s3oa5qw6er6qw0t2s3x2a3d7e1g3y4q7'
+jwt = JWTManager(app)
+
 
 uri = "mongodb+srv://newtemp1:456123.qaz@cluster0.txedt1k.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
@@ -23,20 +27,19 @@ except Exception as e:
     print(e)
 
 
-# @app.route('/summary')
-# def summary():
-#     #data = make_summary()
-#     response = app.response_class(
-#         response=json.dumps({"name":"Alina"}),
-#         status=200,
-#         mimetype='application/json'
-#     )
-#     return response
-
 @app.route('/')
 def home1():
     return jsonify({"mssg": "The API works"})
 
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+@app.route('/login', methods=['POST'])
+   def login():
+       # Проверка учетных данных пользователя
+       # ...
+
+       # Если учетные данные верны, генерируем JWT
+       access_token = create_access_token(identity=user_id)
+       return {'access_token': access_token}, 200
 
 @app.route('/number/<var1>')
 def number(var1):

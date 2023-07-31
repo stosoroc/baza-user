@@ -2,3 +2,4 @@ Flask
 Gunicorn
 Flask-CORS
 Flask-PyMongo
+flask-jwt-extended
