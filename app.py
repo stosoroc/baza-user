@@ -32,14 +32,21 @@ def home1():
     return jsonify({"mssg": "The API works"})
 
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-@app.route('/login', methods=['POST'])
-   def login():
-       # Проверка учетных данных пользователя
-       # ...
 
-       # Если учетные данные верны, генерируем JWT
-       access_token = create_access_token(identity=user_id)
-       return {'access_token': access_token}, 200
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+
+    # Проверка учетных данных пользователя
+    user = collection.find_one({'username': username, 'password': password})
+    if user:
+        # Если учетные данные верны, генерируем JWT
+        access_token = create_access_token(identity=username)
+        return jsonify({'access_token': access_token}), 200
+    else:
+        return jsonify({'message': 'Неверные учетные данные'}), 401
+
 
 @app.route('/number/<var1>')
 def number(var1):
